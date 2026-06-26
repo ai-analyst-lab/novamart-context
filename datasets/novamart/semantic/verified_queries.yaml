@@ -17,6 +17,7 @@ verified_queries:
            totals (fans out). Verified on Snowflake."
     verified_by: shane
     verified_at: 2026-06-25
+    last_verified: 2026-06-25
 
   - name: membership_retention
     question: "What is our retention rate?"
@@ -28,6 +29,7 @@ verified_queries:
            active-in-both-halves. Verified on Snowflake (~25.6%)."
     verified_by: shane
     verified_at: 2026-06-25
+    last_verified: 2026-06-25
 
   - name: checkout_conversion_rate
     question: "What is our checkout conversion rate?"
@@ -42,3 +44,4 @@ verified_queries:
            checkout sessions that also have a purchase_complete event. Verified on Snowflake."
     verified_by: shane
     verified_at: 2026-06-25
+    last_verified: 2026-06-25

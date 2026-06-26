@@ -9,6 +9,8 @@ metrics:
     denominator: sessions with a checkout_started event
     window: full data window
     rejected: ["session -> purchase over all sessions", "cart -> checkout", "checkout -> payment step", "users grain instead of sessions"]
+    last_verified: 2026-06-25
+    verified_by: shane
 
   - metric: retention
     means: "share of memberships that are currently active"
@@ -21,6 +23,8 @@ metrics:
       - "active-in-both-halves of the window - a cohort-activity metric (~43.3%), not membership retention"
       - "users grain instead of membership grain"
     note: "The three rejected readings are why undefined 'retention' drifts 9-99 percent; this pins one."
+    last_verified: 2026-06-25
+    verified_by: shane
 
   - metric: total_revenue
     means: "total revenue from completed orders"
@@ -31,3 +35,5 @@ metrics:
     rejected:
       - "include cancelled/returned orders"
       - "sum total_amount across an orders-to-order_items join (fans out: ~5.9M vs ~3.15M correct)"
+    last_verified: 2026-06-25
+    verified_by: shane
