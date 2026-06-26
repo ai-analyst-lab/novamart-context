@@ -1,0 +1,33 @@
+# NovaMart metric dictionary (loaded at session start by knowledge-bootstrap).
+# A metric is defined by its MEANING, never by a hardcoded result number.
+# The analyst computes the value from the data; the definition only pins what to count.
+metrics:
+  - metric: checkout_conversion
+    means: "share of checkout sessions that complete a purchase"
+    grain: session
+    numerator: sessions with a purchase_complete event
+    denominator: sessions with a checkout_started event
+    window: full data window
+    rejected: ["session -> purchase over all sessions", "cart -> checkout", "checkout -> payment step", "users grain instead of sessions"]
+
+  - metric: retention
+    means: "share of memberships that are currently active"
+    grain: membership
+    numerator: active_memberships      # measures.yaml
+    denominator: total_memberships     # measures.yaml
+    window: point-in-time (current)
+    rejected:
+      - "repeat-purchase rate (2+ orders / 1+) - a purchase metric (~34.9%), not retention"
+      - "active-in-both-halves of the window - a cohort-activity metric (~43.3%), not membership retention"
+      - "users grain instead of membership grain"
+    note: "The three rejected readings are why undefined 'retention' drifts 9-99 percent; this pins one."
+
+  - metric: total_revenue
+    means: "total revenue from completed orders"
+    grain: order
+    numerator: gross_revenue           # measures.yaml (completed only)
+    denominator: null
+    window: full data window
+    rejected:
+      - "include cancelled/returned orders"
+      - "sum total_amount across an orders-to-order_items join (fans out: ~5.9M vs ~3.15M correct)"

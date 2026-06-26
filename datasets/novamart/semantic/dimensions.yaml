@@ -1,0 +1,87 @@
+# NovaMart semantic layer: DIMENSIONS.
+# Categorical attributes for grouping/filtering, each with synonyms (map a question's words to the column)
+# and sample_values (the REAL values, so the agent never invents a filter literal).
+# sample_values were PROFILED from BOOTCAMP_DB.NOVAMART on Snowflake 2026-06-25 - profiling matters:
+# device is web/ios/android (NOT desktop/mobile/tablet), channel is organic/tiktok_ads/paid_search/...
+schema_version: 1
+dataset: novamart
+
+dimensions:
+  - dimension: acquisition_channel
+    entity: user
+    expr: users.acquisition_channel
+    data_type: varchar
+    synonyms: ["channel", "acquisition source", "marketing channel", "where the user came from"]
+    sample_values: ["organic", "tiktok_ads", "paid_search", "social", "email", "referral"]
+    description: "Channel a user was acquired through, set at signup."
+
+  - dimension: country
+    entity: user
+    expr: users.country
+    data_type: varchar
+    synonyms: ["geo", "market", "region"]
+    sample_values: ["US", "UK", "CA", "DE", "AU", "other"]
+
+  - dimension: age_bucket
+    entity: user
+    expr: users.age_bucket
+    data_type: varchar
+    synonyms: ["age group", "age range"]
+    sample_values: ["18-24", "25-34", "35-44", "45-54", "55+"]
+
+  - dimension: device
+    entity: session
+    expr: sessions.device
+    data_type: varchar
+    synonyms: ["platform", "device type"]
+    sample_values: ["web", "ios", "android"]
+    description: "Session device. Real values are web / ios / android (NOT desktop/mobile/tablet).
+                  Cross-check: events.app_version IS NULL ~ web; 2.4.0 / 3.2.0 are mobile app versions."
+
+  - dimension: order_status
+    entity: order
+    expr: orders.status
+    data_type: varchar
+    synonyms: ["status", "state", "fulfillment status"]
+    sample_values: ["completed", "cancelled", "returned"]
+    description: "Order lifecycle state. Filter to 'completed' for revenue; keep all for funnel conversion."
+
+  - dimension: is_plus_member_order
+    entity: order
+    expr: orders.is_plus_member_order
+    data_type: boolean
+    synonyms: ["plus order", "membership order", "plus member order"]
+    sample_values: [true, false]
+    description: "Whether the order was placed by a Plus member. Skewed ~1,622 true / ~45,577 false."
+
+  - dimension: product_category
+    entity: product
+    expr: products.category
+    data_type: varchar
+    synonyms: ["category", "department"]
+    sample_values: ["clothing", "electronics", "home", "beauty", "sports", "books"]
+
+  - dimension: plan_type
+    entity: membership
+    expr: memberships.plan_type
+    data_type: varchar
+    synonyms: ["membership plan", "plan", "subscription tier"]
+    sample_values: ["plus_trial", "plus_monthly", "plus_annual"]
+
+  - dimension: membership_status
+    entity: membership
+    expr: memberships.status
+    data_type: varchar
+    synonyms: ["membership state"]
+    sample_values: ["expired", "converted", "active", "cancelled"]
+    description: "Membership state. is_current is a separate boolean for the currently-active set."
+
+  - dimension: event_type
+    entity: event
+    expr: events.event_type
+    data_type: varchar
+    synonyms: ["funnel step", "interaction type", "action"]
+    sample_values: ["page_view", "product_view", "login", "add_to_cart", "app_open", "search",
+                    "checkout_started", "payment_attempted", "purchase_complete", "save_for_later"]
+    description: "Funnel/interaction event. Funnel order: page_view -> product_view -> add_to_cart ->
+                  checkout_started -> payment_attempted -> purchase_complete."
