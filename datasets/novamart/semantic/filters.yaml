@@ -14,7 +14,7 @@ filters:
   - name: active_memberships
     entity: membership
     expr: "memberships.is_current = true"
-    description: "Currently-active memberships. The active set for membership metrics like retention."
+    description: "Currently-active memberships (is_current = true)."
 
   - name: purchase_sessions
     entity: session

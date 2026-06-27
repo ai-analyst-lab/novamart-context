@@ -90,8 +90,7 @@ entities:
     grain: one row per NovaMart Plus membership record
     row_count: 5513
     caveats:
-      - "ended_at IS NULL means still active. Use is_current (or status) for the active set. Membership
-         retention = currently-active memberships / total memberships (is_current / count)."
+      - "ended_at IS NULL means still active. Use is_current (or status) for the active set."
 
   - entity: promotion
     logical_table: promotions

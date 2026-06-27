@@ -12,20 +12,6 @@ metrics:
     last_verified: 2026-06-25
     verified_by: shane
 
-  - metric: retention
-    means: "share of memberships that are currently active"
-    grain: membership
-    numerator: active_memberships      # measures.yaml
-    denominator: total_memberships     # measures.yaml
-    window: point-in-time (current)
-    rejected:
-      - "repeat-purchase rate (2+ orders / 1+) - a purchase metric (~34.9%), not retention"
-      - "active-in-both-halves of the window - a cohort-activity metric (~43.3%), not membership retention"
-      - "users grain instead of membership grain"
-    note: "The three rejected readings are why undefined 'retention' drifts 9-99 percent; this pins one."
-    last_verified: 2026-06-25
-    verified_by: shane
-
   - metric: total_revenue
     means: "total revenue from completed orders"
     grain: order

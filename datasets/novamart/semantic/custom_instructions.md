@@ -12,5 +12,3 @@ in entities.yaml; this is the one place to scan them.
   Derive purchase outcome from `events.event_type = 'purchase_complete'` or by joining orders on session_id.
 - **Device / app_version.** `events.app_version IS NULL` ~ web; 2.4.0 / 3.2.0 are the mobile app versions.
   `sessions.device` values are web / ios / android (not desktop/mobile/tablet).
-- **"Retention" means membership retention** (currently-active / total memberships). It is NOT
-  repeat-purchase rate and NOT active-in-both-halves. If the user means something else, ask.
