@@ -4,8 +4,10 @@ The shared, version-controlled context the AI analyst reads: the semantic layer 
 for the NovaMart dataset. This repo is the team's single source of truth.
 
 - `datasets/novamart/semantic/` — entities, relationships, dimensions (synonyms + real sample values),
-  measures, named filters, verified queries, custom instructions.
+  measures, named filters. The semantic layer only.
 - `datasets/novamart/metrics/index.yaml` — meaning-only metric definitions (no SQL, no stored numbers).
+- `datasets/novamart/verified_queries.yaml` — verified question + known-good SQL examples.
+- `datasets/novamart/custom_instructions.md` — the store's own small instructions file.
 
 ## The homes in this repo (the communal store)
 
@@ -17,9 +19,9 @@ analyst-side local or runtime and are NOT files in this repo.
 |---|---|
 | Meaning contracts (Home 3) | `datasets/novamart/metrics/index.yaml` |
 | Semantic layer (Home 4) | `datasets/novamart/semantic/{entities,relationships,dimensions,measures,filters}.yaml` |
-| Verified examples (Home 5) | `datasets/novamart/semantic/verified_queries.yaml` |
+| Verified examples (Home 5) | `datasets/novamart/verified_queries.yaml` |
 | Corrections (Home 6) | `datasets/novamart/corrections.md` |
-| Store instructions | `datasets/novamart/semantic/custom_instructions.md` |
+| Store instructions | `datasets/novamart/custom_instructions.md` |
 
 Not here (by design): resident instructions (Home 1), skills (Home 2), memory (Home 7) and the
 schema/catalog home (Home 9) are **analyst-side local** (each analyst's own `.knowledge`); retrieval
