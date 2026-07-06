@@ -1,3 +1,4 @@
+# HOME: Semantic layer (Home 4) — the communal store's executable semantic-layer home.
 # NovaMart semantic layer: DIMENSIONS.
 # Categorical attributes for grouping/filtering, each with synonyms (map a question's words to the column)
 # and sample_values (the REAL values, so the agent never invents a filter literal).

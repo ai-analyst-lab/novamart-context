@@ -1,3 +1,4 @@
+# HOME: Verified examples (Home 5) — the communal store's verified-examples home.
 # NovaMart semantic layer: VERIFIED QUERIES (blessed question -> SQL exemplars).
 # When a question pattern has a known-good query, save it here as a few-shot exemplar the agent retrieves.
 # Stores the SQL PATTERN only, never the result number (the analyst recomputes). Each is human-verified and

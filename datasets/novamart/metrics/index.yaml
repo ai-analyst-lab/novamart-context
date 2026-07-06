@@ -1,3 +1,4 @@
+# HOME: Meaning contracts (Home 3) — the communal store's meaning-contract home.
 # NovaMart metric dictionary (loaded at session start by knowledge-bootstrap).
 # A metric is defined by its MEANING, never by a hardcoded result number.
 # The analyst computes the value from the data; the definition only pins what to count.

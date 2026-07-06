@@ -1,3 +1,4 @@
+# HOME: Semantic layer (Home 4) — the communal store's executable semantic-layer home.
 # NovaMart semantic layer: MEASURES.
 # Additive building blocks. expr names the column or event; NO full SQL and NO hardcoded result numbers -
 # the analyst computes the value at query time. Metrics (metrics/index.yaml) reference these measures so a

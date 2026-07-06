@@ -1,3 +1,4 @@
+# HOME: Semantic layer (Home 4) — the communal store's executable semantic-layer home (entities/relationships/dimensions/measures/filters).
 # NovaMart semantic layer: ENTITIES (logical tables).
 #
 # The authoritative source table for each business concept, its keys, what one row means (grain), and the

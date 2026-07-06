@@ -1,3 +1,6 @@
+# HOME: schema/catalog guard. The schema+catalog HOME itself (Home 9) is ANALYST-SIDE LOCAL (.knowledge),
+# not the communal store. This file is only the semantic layer's freshness guard: column-shape checksums the
+# schema-diff guard re-checks at load. It supports the semantic layer; it is not the schema home.
 # Schema snapshots: known-good column-shape checksums per table-backed definition.
 # The schema-diff guard (ai-analyst-plus helpers/schema_guard.py) re-reads the live schema at load
 # and quarantines any definition whose table changed shape (a renamed or dropped column).
