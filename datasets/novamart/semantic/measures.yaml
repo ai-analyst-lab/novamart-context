@@ -7,16 +7,26 @@ schema_version: 1
 dataset: novamart
 
 measures:
-  - measure: gross_revenue
+  - measure: total_revenue
     entity: order
-    description: "Sum of order total for COMPLETED orders only."
+    description: "Total revenue from completed orders — sum of orders.total_amount, which is net of the discount and includes shipping."
     aggregation: sum
     expr: orders.total_amount
     filter: "orders.status = 'completed'"
     rejected:
       - "sum over all statuses (includes cancelled/returned)"
-      - "subtotal instead of total_amount"
       - "sum total_amount across an orders-to-order_items join (fans out, inflates)"
+
+  - measure: gross_revenue
+    entity: order
+    description: "Pre-discount merchandise revenue from completed orders — sum of orders.subtotal, which excludes both the discount and shipping."
+    aggregation: sum
+    expr: orders.subtotal
+    filter: "orders.status = 'completed'"
+    rejected:
+      - "total_amount instead of subtotal (total_amount is net of discount and includes shipping)"
+      - "sum over all statuses (includes cancelled/returned)"
+      - "sum across an orders-to-order_items join (fans out, inflates)"
 
   - measure: order_count
     entity: order
