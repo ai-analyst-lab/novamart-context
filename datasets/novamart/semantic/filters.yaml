@@ -1,3 +1,4 @@
+# HOME: Semantic layer (Home 4) — the communal store's executable semantic-layer home.
 # NovaMart semantic layer: NAMED FILTERS (segments).
 # Common conditions given a name so the agent reuses the blessed filter instead of re-deriving it (and
 # dropping it half the time). expr is the SQL condition; no result numbers.
