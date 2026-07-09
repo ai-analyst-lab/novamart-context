@@ -55,3 +55,19 @@ metrics:
       - "active / (active + cancelled) (shrinks the denominator by excluding expired and other non-cancelled statuses)"
     last_verified: 2026-07-09
     verified_by: shane
+
+  - metric: net_revenue
+    means: "revenue from completed orders minus revenue from returned orders, at each order's settlement amount"
+    grain: order
+    numerator: "SUM(total_amount) for completed orders − SUM(total_amount) for returned orders"
+    denominator: null
+    window: full data window
+    filters:
+      - "orders.status IN ('completed', 'returned')"
+    rejected:
+      - "subtracting discount_amount from total_amount (total_amount is already net of the discount; subtracting again double-counts it)"
+      - "counting cancelled orders as returns (cancelled orders never captured revenue — they should be excluded entirely)"
+      - "ignoring returned orders (that yields completed revenue / total_revenue, a different metric)"
+      - "joining through order_items to sum total_amount (the order total repeats per line item, inflating the result)"
+    last_verified: 2026-07-09
+    verified_by: shane
