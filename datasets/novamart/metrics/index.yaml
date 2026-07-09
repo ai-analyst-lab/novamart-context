@@ -40,3 +40,18 @@ metrics:
       - "sum across an orders-to-order_items join (fans out, inflates)"
     last_verified: 2026-07-07
     verified_by: shane
+
+  - metric: retention
+    means: "share of memberships that are currently active out of all memberships ever created"
+    grain: membership
+    numerator: memberships where is_current = TRUE
+    denominator: all memberships ever created
+    window: snapshot (point-in-time)
+    filters:
+      - "no status or date filter on the denominator — every membership_id counts"
+    rejected:
+      - "active or converted over all memberships (overcounts: counts converted trial-to-paid members as retained)"
+      - "1 − (cancelled / all memberships) (overcounts: counts expired members as retained)"
+      - "active / (active + cancelled) (shrinks the denominator by excluding expired and other non-cancelled statuses)"
+    last_verified: 2026-07-09
+    verified_by: shane
