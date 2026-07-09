@@ -49,3 +49,24 @@ verified_queries:
     verified_by: shane
     verified_at: 2026-07-08
     last_verified: 2026-07-08
+
+  - name: experiment_purchase_rate_by_arm_checkout_redesign
+    question: "What was the purchase rate by arm in the checkout_redesign experiment?"
+    metric: experiment_purchase_rate
+    sql: |
+      WITH a AS (SELECT user_id, variant, assigned_date
+                 FROM experiment_assignments WHERE experiment_id = 2)
+      SELECT a.variant,
+             COUNT(DISTINCT a.user_id) AS assigned_users,
+             COUNT(DISTINCT IFF(o.status = 'completed'
+                                AND o.order_date >= a.assigned_date, o.user_id, NULL)) * 1.0
+               / COUNT(DISTINCT a.user_id) AS purchase_rate
+      FROM a LEFT JOIN orders o ON o.user_id = a.user_id
+      GROUP BY a.variant ORDER BY a.variant
+    note: "Experiment conversion, the house way: intention-to-treat. Denominator = every assigned
+           user in the arm. Converter = a COMPLETED ORDER (orders table, never events) placed ON OR
+           AFTER that user's own assigned_date, correlated per user, never the experiment's calendar
+           window. No end bound. Order grain, no order_items join. Verified on Snowflake."
+    verified_by: shane
+    verified_at: 2026-07-08
+    last_verified: 2026-07-08
